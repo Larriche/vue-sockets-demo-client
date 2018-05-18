@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
                             <div class="input-group">
-                                <input type="text" class="form-control chatbox" placeholder="Enter a keyword to search" name="search_term">
+                                <input type="text" class="form-control chatbox" placeholder="Enter your message" name="search_term">
 
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn btn-lg btn-info" id="search-button">
