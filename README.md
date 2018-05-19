@@ -1,6 +1,6 @@
-# edusite
+# sockets_client
 
-> Client site for Eduhub
+> Client site for sockets NodeJS app
 
 ## Build Setup
 
