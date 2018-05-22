@@ -10,9 +10,8 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
                 <p v-if="isConnected">We're connected to the server!</p>
                 <message
-                    :direction="'incoming'"></message>
-                <message
-                    :direction="'outgoing'"></message>
+                    v-for="message in messages"
+                    :message="message"></message>
 
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
@@ -92,13 +91,16 @@ export default {
             this.$socket.emit('message', this.message)
         },
 
-        loadMessages() {
-            //this.
+        initLoadMessages(query = {}) {
+            this.loadMessages(query)
+                .catch((error) => {
+                    alert('An error occurred');
+                });
         }
     },
 
     mounted() {
-
+        this.initLoadMessages();
     }
 }
 </script>

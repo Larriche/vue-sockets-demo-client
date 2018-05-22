@@ -1,4 +1,5 @@
-import MessagesService from '@/services/messages';
+import MessagesService from '../../services/messages';
+import { SET_MESSAGES } from '../mutation_types';
 
 const state = {
     messages: []
@@ -23,7 +24,7 @@ const mutations = {
 	 * @param {Object} payload Data as gotten from the API endpoint
 	 */
     [SET_MESSAGES] (state, payload) {
-        state.messages = payload.data;
+        state.messages = payload;
     }
 };
 

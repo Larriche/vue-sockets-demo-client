@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { store } from '../store';
 import { router } from '../router';
 import Config from '../../config/app';
