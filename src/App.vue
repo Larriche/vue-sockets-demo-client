@@ -1,7 +1,7 @@
 <template>
 	<div class="row">
 		<!-- sidebar -->
-		<app-sidebar></app-sidebar>
+		<app-sidebar v-if="authenticated"></app-sidebar>
 
 		<!-- main content -->
 		<transition name="fade" mode="out-in">
@@ -12,11 +12,31 @@
 
 <script>
 import Partials from './components/partials';
+import { mapGetters, mapActions } from 'vuex';
+
 
 export default {
 	components: {
 		...Partials
-	}
+	},
+
+	computed: {
+			...mapGetters({
+				authenticated: 'Auth/check',
+				getUser: 'Auth/getUser',
+			})
+		},
+
+		methods: {
+			...mapActions({
+				logout: 'Auth/logout',
+			}),
+
+			logoutUser() {
+				this.logout();
+				this.$router.push({ name: 'login' });
+			}
+		}
 }
 </script>
 

@@ -16,6 +16,12 @@ const History = resolve => {
     });
 };
 
+const Login = resolve => {
+    require.ensure(['../components/auth/Login.vue'], () => {
+        resolve(require('../components/auth/Login.vue'));
+    });
+};
+
 export default [
     {
         path: '/messages',
@@ -31,5 +37,10 @@ export default [
         path: '/history',
         component: History,
         name: 'history'
+    },
+    {
+        path: '/login',
+        component: Login,
+        name: 'login'
     }
 ];

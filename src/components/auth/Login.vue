@@ -1,0 +1,56 @@
+<template>
+    <div class="col-lg-10 col-md-10 col-xs-12">
+        <div class="row page-body">
+            <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-2">
+                <form role="form" @submit.prevent="loginUser">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" v-model="user.email">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" v-model="user.password">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-8">
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+    data() {
+        return {
+            user: {
+                email: '',
+                password: ''
+            }
+        }
+    },
+
+    methods: {
+        ...mapActions({
+            authenticate: 'Auth/authenticate',
+        }),
+
+        loginUser() {
+            this.authenticate(this.user)
+                .then((response) => {
+						this.$router.push({ name: 'messages' });
+					})
+					.catch((errors) => {
+                        alert('Invalid login details')
+					});
+        }
+    }
+}
+</script>
