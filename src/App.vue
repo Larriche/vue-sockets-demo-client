@@ -7,9 +7,6 @@
 		<transition name="fade" mode="out-in">
 			<router-view></router-view>
 		</transition>
-
-		<!-- footer -->
-		<app-footer></app-footer>
 	</div>
 </template>
 

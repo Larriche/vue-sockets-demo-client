@@ -37,7 +37,11 @@
 </template>
 
 <script>
+// Child Components
 import Message from './Message';
+
+// Vuex imports
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     data() {
@@ -46,6 +50,12 @@ export default {
             socketMessage: '',
             message: ''
         }
+    },
+
+    computed: {
+        ...mapGetters({
+            messages: 'Messages/getAll',
+        })
     },
 
     components: {
@@ -69,17 +79,26 @@ export default {
     },
 
     methods: {
+        ...mapActions({
+            loadMessages: 'Messages/loadAll'
+        }),
+
         pingServer() {
             // Send the "pingServer" event to the server.
             this.$socket.emit('pingServer', 'PING!')
         },
+
         sendMessage() {
             this.$socket.emit('message', this.message)
+        },
+
+        loadMessages() {
+            //this.
         }
     },
 
     mounted() {
-        pingServer();
+
     }
 }
 </script>
