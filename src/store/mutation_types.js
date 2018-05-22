@@ -8,3 +8,6 @@ export const LOGOUT = 'LOGOUT';
 // Messages
 export const SET_MESSAGES = 'SET_MESSAGES';
 export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
+
+// Users mutation types
+export const SET_USERS = 'SET_USERS';

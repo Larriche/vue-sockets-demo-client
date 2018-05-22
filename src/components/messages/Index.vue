@@ -14,11 +14,22 @@
                     :message="message"></message>
 
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-xs-12">
+                        <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                            <div class="form-group" v-if="user.role=='admin'">
+                                <select class="form-control">
+                                    <option value="">Select a client</option>
+                                    <option v-for="user in users"
+                                            value="user.id"
+                                            v-model="messageTo">
+                                            {{ user.name }}
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="input-group">
                                 <input type="text"
                                     class="form-control chatbox"
-                                    placeholder="Enter your message"
+                                    placeholder="Say something"
                                     v-model="message"
                                     name="search_term">
 
@@ -54,7 +65,8 @@ export default {
     computed: {
         ...mapGetters({
             messages: 'Messages/getAll',
-            user: 'Auth/getUser'
+            user: 'Auth/getUser',
+            users: 'Users/getAll'
         })
     },
 
@@ -87,7 +99,9 @@ export default {
     methods: {
         ...mapActions({
             loadMessages: 'Messages/loadAll',
-            addNewMessage: 'Messages/addNewMessage'
+            loadUsers: 'Users/loadAll',
+            addNewMessage: 'Messages/addNewMessage',
+            messageTo: ''
         }),
 
         pingServer() {
@@ -104,6 +118,10 @@ export default {
                 fromId: userId
             };
 
+            if (this.user.role == 'admin') {
+                messageData.toId = this.messageTo;
+            }
+
             this.$socket.emit('message', messageData)
         },
 
@@ -112,11 +130,19 @@ export default {
                 .catch((error) => {
                     alert('An error occurred');
                 });
+        },
+
+        initLoadUsers(query = {}) {
+             this.loadUsers(query)
+                .catch((error) => {
+                    alert('An error occurred');
+                });
         }
     },
 
     mounted() {
         this.initLoadMessages();
+        this.initLoadUsers();
     }
 }
 </script>
