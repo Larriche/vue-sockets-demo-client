@@ -1,5 +1,6 @@
 import MessagesService from '../../services/messages';
 import { SET_MESSAGES } from '../mutation_types';
+import { ADD_NEW_MESSAGE } from '../mutation_types';
 
 const state = {
     messages: []
@@ -25,6 +26,10 @@ const mutations = {
 	 */
     [SET_MESSAGES] (state, payload) {
         state.messages = payload;
+    },
+
+    [ADD_NEW_MESSAGE] (state, message) {
+        state.messages.push(message);
     }
 };
 
@@ -43,6 +48,10 @@ const actions = {
             })
             .catch((error) => Promise.reject(error));
     },
+
+    addNewMessage({commit}, message) {
+        commit(ADD_NEW_MESSAGE, message);
+    }
 };
 
 const namespaced = true;

@@ -54,6 +54,7 @@ export default {
     computed: {
         ...mapGetters({
             messages: 'Messages/getAll',
+            user: 'Auth/getUser'
         })
     },
 
@@ -73,13 +74,20 @@ export default {
 
         // Fired when the server sends something on the "message" channel.
         message(data) {
-            console.log(data);
+            if (data.from_id == this.user.id) {
+                data.direction = 'outgoing';
+            } else {
+                data.direction = 'incoming';
+            }
+
+            this.addNewMessage(data);
         }
     },
 
     methods: {
         ...mapActions({
-            loadMessages: 'Messages/loadAll'
+            loadMessages: 'Messages/loadAll',
+            addNewMessage: 'Messages/addNewMessage'
         }),
 
         pingServer() {
@@ -88,7 +96,15 @@ export default {
         },
 
         sendMessage() {
-            this.$socket.emit('message', this.message)
+            let message = this.message;
+            let userId = this.user.id;
+
+            let messageData = {
+                message: message,
+                fromId: userId
+            };
+
+            this.$socket.emit('message', messageData)
         },
 
         initLoadMessages(query = {}) {

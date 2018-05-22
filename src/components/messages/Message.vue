@@ -12,7 +12,7 @@ export default {
 
     computed: {
         messageClass() {
-            let direction = 'incoming';
+            let direction = this.message.direction;
 
             if (direction == 'incoming') {
                 return 'message incoming col-lg-6 col-md-6 col-xs-12';

@@ -76,7 +76,7 @@ const actions = {
         return AuthService.authenticate(user)
             .then((response) => {
                 commit(AUTHENTICATE);
-                commit(UPDATE_USER_INFO, response);
+                commit(UPDATE_USER_INFO, response.user);
 
                 return Promise.resolve(response);
             }, (error) => {

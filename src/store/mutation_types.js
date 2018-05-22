@@ -7,4 +7,4 @@ export const LOGOUT = 'LOGOUT';
 
 // Messages
 export const SET_MESSAGES = 'SET_MESSAGES';
-
+export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
