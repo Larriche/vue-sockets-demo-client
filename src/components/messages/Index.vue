@@ -8,6 +8,7 @@
 
         <div class="row page-body">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                <p v-if="isConnected">We're connected to the server!</p>
                 <message
                     :direction="'incoming'"></message>
                 <message
@@ -16,10 +17,14 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xs-12">
                             <div class="input-group">
-                                <input type="text" class="form-control chatbox" placeholder="Enter your message" name="search_term">
+                                <input type="text"
+                                    class="form-control chatbox"
+                                    placeholder="Enter your message"
+                                    v-model="message"
+                                    name="search_term">
 
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-lg btn-info" id="search-button">
+                                    <button type="submit" class="btn btn-lg btn-info" id="search-button" @click="sendMessage">
                                         SEND
                                     </button>
                                 </span>
@@ -35,8 +40,46 @@
 import Message from './Message';
 
 export default {
+    data() {
+        return {
+            isConnected: false,
+            socketMessage: '',
+            message: ''
+        }
+    },
+
     components: {
         Message
+    },
+
+    sockets: {
+        connect() {
+            // Fired when the socket connects.
+            this.isConnected = true;
+        },
+
+        disconnect() {
+            this.isConnected = false;
+        },
+
+        // Fired when the server sends something on the "messageChannel" channel.
+        messageChannel(data) {
+            this.socketMessage = data
+        }
+    },
+
+    methods: {
+        pingServer() {
+            // Send the "pingServer" event to the server.
+            this.$socket.emit('pingServer', 'PING!')
+        },
+        sendMessage() {
+            this.$socket.emit('message', this.message)
+        }
+    },
+
+    mounted() {
+        pingServer();
     }
 }
 </script>
