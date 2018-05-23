@@ -16,6 +16,12 @@ const History = resolve => {
     });
 };
 
+const Commands = resolve => {
+    require.ensure(['../components/commands/Index.vue'], () => {
+        resolve(require('../components/commands/Index.vue'));
+    });
+};
+
 const Login = resolve => {
     require.ensure(['../components/auth/Login.vue'], () => {
         resolve(require('../components/auth/Login.vue'));
@@ -37,6 +43,11 @@ export default [
         path: '/history',
         component: History,
         name: 'history'
+    },
+    {
+        path: '/commands',
+        component: Commands,
+        name: 'commands'
     },
     {
         path: '/login',

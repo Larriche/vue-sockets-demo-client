@@ -23,6 +23,13 @@
                         </a>
                     </router-link>
 
+                    <router-link :to="{ name: 'commands' }" tag="li" active-class="active" exact>
+                        <a>
+                            <i class="fa fa-wrench"></i>
+                            <p>Commands</p>
+                        </a>
+                    </router-link>
+
                     <router-link :to="{ name: 'history' }" tag="li" active-class="active" exact>
                         <a>
                             <i class="fa fa-clock-o"></i>

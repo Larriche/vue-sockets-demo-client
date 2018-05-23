@@ -36,7 +36,7 @@
                                 name="search_term">
 
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-lg btn-info" id="search-button" @click="sendMessage">
+                                <button type="submit" id="send-button" class="btn btn-lg btn-info" @click="sendMessage">
                                     SEND
                                 </button>
                             </span>
@@ -146,7 +146,7 @@ export default messages;
     height: 50px;
 }
 
-#search-button {
+#send-button {
     height: 50px;
 }
 
