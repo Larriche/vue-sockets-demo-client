@@ -9,5 +9,8 @@ export const LOGOUT = 'LOGOUT';
 export const SET_MESSAGES = 'SET_MESSAGES';
 export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
 
+// Activities
+export const SET_ACTIVITIES = 'SET_ACTIVITIES';
+
 // Users mutation types
 export const SET_USERS = 'SET_USERS';

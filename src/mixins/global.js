@@ -9,6 +9,20 @@ export default {
         })
     },
 
+    filters: {
+        formattedDate(value) {
+            let date = moment(value);
+
+            return date.isValid() ? date.format('ddd Do MMM, YYYY') : value;
+        },
+
+        formattedDateTime(value) {
+            let date = moment(value);
+
+            return date.isValid() ? date.format('ddd Do MMM, YYYY hh:mm:A') : value;
+        }
+    },
+
     methods: {
         ...mapActions({
             loadUsers: 'Users/loadAll',

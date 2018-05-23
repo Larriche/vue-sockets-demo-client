@@ -21,9 +21,14 @@
                     <tbody>
                     <tr v-for="user in users">
                         <td>{{ user.name }}</td>
-                        <td>{{ user.created_at ? user.created_at : 'N/A'}}</td>
-                        <td>{{ user.last_visit ? user.last_visit : 'N/A'}}</td>
-                        <td>{{ user.last_activity ? user.last_activity : 'N/A'}}</td>
+                        <td v-if="user.created_at">{{ user.created_at | formattedDateTime }}</td>
+                        <td v-else>N/A</td>
+
+                        <td v-if="user.last_visit">{{ user.last_visit | formattedDateTime }}</td>
+                        <td v-else>N/A</td>
+
+                        <td v-if="user.last_activity">{{ user.last_activity | formattedDateTime }}</td>
+                        <td v-else>N/A</td>
                     </tr>
                     </tbody>
                 </table>
@@ -31,9 +36,3 @@
         </div>
     </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
