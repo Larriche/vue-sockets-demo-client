@@ -8,11 +8,17 @@
 
 <script>
 export default {
-    props: ['message'],
+    props: ['message', 'userId'],
 
     computed: {
         messageClass() {
-            let direction = this.message.direction;
+            let direction = '';
+
+            if (this.message.fromId == this.userId) {
+                direction = 'outgoing';
+            } else {
+                direction = 'incoming';
+            }
 
             if (direction == 'incoming') {
                 return 'message incoming col-lg-6 col-md-6 col-xs-12';

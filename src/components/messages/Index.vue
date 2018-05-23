@@ -11,16 +11,16 @@
                 <p v-if="isConnected">We're connected to the server!</p>
                 <message
                     v-for="message in messages"
-                    :message="message"></message>
+                    :message="message"
+                    :userId="user.id"></message>
 
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-2 col-md-offset-2">
                             <div class="form-group" v-if="user.role=='admin'">
-                                <select class="form-control">
+                                <select class="form-control" v-model="messageTo">
                                     <option value="">Select a client</option>
                                     <option v-for="user in users"
-                                            value="user.id"
-                                            v-model="messageTo">
+                                            :value="user.id">
                                             {{ user.name }}
                                     </option>
                                 </select>
@@ -53,12 +53,13 @@ import Message from './Message';
 // Vuex imports
 import { mapGetters, mapActions } from 'vuex';
 
-export default {
+const messages =  {
     data() {
         return {
             isConnected: false,
             socketMessage: '',
-            message: ''
+            message: '',
+            messageTo: ''
         }
     },
 
@@ -76,8 +77,11 @@ export default {
 
     sockets: {
         connect() {
+            let room = 'user_' + this.user.id;
+
             // Fired when the socket connects.
             this.isConnected = true;
+            this.$socket.emit('room', room);
         },
 
         disconnect() {
@@ -86,13 +90,8 @@ export default {
 
         // Fired when the server sends something on the "message" channel.
         message(data) {
-            if (data.from_id == this.user.id) {
-                data.direction = 'outgoing';
-            } else {
-                data.direction = 'incoming';
-            }
-
             this.addNewMessage(data);
+            this.$socket.emit('transfer_message', data);
         }
     },
 
@@ -101,7 +100,6 @@ export default {
             loadMessages: 'Messages/loadAll',
             loadUsers: 'Users/loadAll',
             addNewMessage: 'Messages/addNewMessage',
-            messageTo: ''
         }),
 
         pingServer() {
@@ -126,6 +124,10 @@ export default {
         },
 
         initLoadMessages(query = {}) {
+            query = {
+                user_id: this.user.id
+            };
+
             this.loadMessages(query)
                 .catch((error) => {
                     alert('An error occurred');
@@ -144,7 +146,9 @@ export default {
         this.initLoadMessages();
         this.initLoadUsers();
     }
-}
+};
+
+export default messages;
 </script>
 
 <style scoped>
