@@ -16,14 +16,14 @@
                         </a>
                     </router-link>
 
-                    <router-link :to="{ name: 'actions' }" tag="li" active-class="active" exact>
+                    <router-link :to="{ name: 'actions' }" tag="li" active-class="active" v-if="user.role == 'user'" exact>
                         <a>
                             <i class="fa fa-wrench"></i>
                             <p>Actions</p>
                         </a>
                     </router-link>
 
-                    <router-link :to="{ name: 'commands' }" tag="li" active-class="active" exact>
+                    <router-link :to="{ name: 'commands' }" tag="li" active-class="active" v-if="user.role == 'admin'" exact>
                         <a>
                             <i class="fa fa-wrench"></i>
                             <p>Commands</p>

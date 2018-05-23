@@ -68,8 +68,6 @@ const messages =  {
     computed: {
         ...mapGetters({
             messages: 'Messages/getAll',
-            user: 'Auth/getUser',
-            users: 'Users/getAll'
         })
     },
 
@@ -87,7 +85,6 @@ const messages =  {
     methods: {
         ...mapActions({
             loadMessages: 'Messages/loadAll',
-            loadUsers: 'Users/loadAll',
             addNewMessage: 'Messages/addNewMessage',
         }),
 
@@ -121,19 +118,11 @@ const messages =  {
                 .catch((error) => {
                     alert('An error occurred');
                 });
-        },
-
-        initLoadUsers(query = {}) {
-             this.loadUsers(query)
-                .catch((error) => {
-                    alert('An error occurred');
-                });
         }
     },
 
     mounted() {
         this.initLoadMessages();
-        this.initLoadUsers();
     }
 };
 

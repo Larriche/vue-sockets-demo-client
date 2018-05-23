@@ -41,13 +41,6 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    computed: {
-        ...mapGetters({
-            user: 'Auth/getUser',
-            users: 'Users/getAll'
-        })
-    },
-
     data() {
         return {
             command: '',
@@ -56,10 +49,6 @@ export default {
     },
 
     methods: {
-        ...mapActions({
-            loadUsers: 'Users/loadAll',
-        }),
-
         sendCommand() {
             let command = this.command;
             let fromId = this.user.id;
@@ -72,18 +61,7 @@ export default {
             };
 
             this.$socket.emit('command', data);
-        },
-
-        initLoadUsers(query = {}) {
-             this.loadUsers(query)
-                .catch((error) => {
-                    alert('An error occurred');
-                });
         }
-    },
-
-    mounted() {
-        this.initLoadUsers();
     }
 }
 </script>
