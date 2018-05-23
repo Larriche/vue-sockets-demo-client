@@ -32,7 +32,6 @@
   color: #FFFAF0;
   margin-bottom: 10px;
   cursor: pointer;
-  padding: 18px;
 }
 
 .menu li .fa {
@@ -55,6 +54,10 @@
 .menu li a {
   text-decoration: none;
   color: #FFFAF0;
+}
+
+.menu p {
+  padding: 18px;
 }
 
 .page-title {

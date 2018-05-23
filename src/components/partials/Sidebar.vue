@@ -11,43 +11,49 @@
                 <ul class="menu">
                     <router-link :to="{ name: 'messages' }" tag="li" active-class="active" exact>
                         <a>
-                            <i class="fa fa-comments-o"></i>
-                            <p>Messages</p>
+                            <p>
+                                <i class="fa fa-comments-o"></i>Messages
+                            </p>
                         </a>
                     </router-link>
 
                     <router-link :to="{ name: 'actions' }" tag="li" active-class="active" v-if="user.role == 'user'" exact>
                         <a>
-                            <i class="fa fa-wrench"></i>
-                            <p>Actions</p>
+                            <p>
+                                <i class="fa fa-wrench"></i>Actions
+                            </p>
                         </a>
                     </router-link>
 
                     <router-link :to="{ name: 'commands' }" tag="li" active-class="active" v-if="user.role == 'admin'" exact>
                         <a>
-                            <i class="fa fa-wrench"></i>
-                            <p>Commands</p>
+                            <p>
+                                <i class="fa fa-wrench"></i>Commands
+                            </p>
                         </a>
                     </router-link>
 
                     <router-link :to="{ name: 'history' }" tag="li" active-class="active" exact>
                         <a>
-                            <i class="fa fa-clock-o"></i>
-                            <p>History</p>
+                            <p>
+                                <i class="fa fa-clock-o"></i>History
+                            </p>
                         </a>
                     </router-link>
 
                     <router-link :to="{ name: 'users' }" tag="li" active-class="active" v-if="user.role == 'admin'" exact>
                         <a>
-                            <i class="fa fa-user"></i>
-                            <p>Users</p>
+                            <p>
+                                <i class="fa fa-user"></i>Users
+                            </p>
                         </a>
                     </router-link>
 
                     <router-link :to="{ name: 'logout' }" tag="li" active-class="active" exact>
                         <a>
-                            <i class="fa fa-sign-out"></i>
-                            <p>Log Out</p>
+                            <p>
+                                <i class="fa fa-sign-out"></i>Log Out
+                            </p>
                         </a>
                     </router-link>
                 </ul>
