@@ -33,7 +33,8 @@ export default {
 
             // Fired when the socket connects.
             this.isConnected = true;
-            this.$socket.emit('room', room);
+			this.$socket.emit('room', room);
+			this.$socket.emit('log_visit', {userId: this.user.id});
         },
 
         disconnect() {

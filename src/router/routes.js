@@ -22,6 +22,12 @@ const Commands = resolve => {
     });
 };
 
+const Users = resolve => {
+    require.ensure(['../components/users/Index.vue'], () => {
+        resolve(require('../components/users/Index.vue'));
+    });
+};
+
 const Login = resolve => {
     require.ensure(['../components/auth/Login.vue'], () => {
         resolve(require('../components/auth/Login.vue'));
@@ -48,6 +54,11 @@ export default [
         path: '/commands',
         component: Commands,
         name: 'commands'
+    },
+    {
+        path: '/users',
+        component: Users,
+        name: 'users'
     },
     {
         path: '/login',

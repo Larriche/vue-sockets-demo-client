@@ -37,6 +37,13 @@
                         </a>
                     </router-link>
 
+                    <router-link :to="{ name: 'users' }" tag="li" active-class="active" v-if="user.role == 'admin'" exact>
+                        <a>
+                            <i class="fa fa-user"></i>
+                            <p>Users</p>
+                        </a>
+                    </router-link>
+
                     <router-link :to="{ name: 'logout' }" tag="li" active-class="active" exact>
                         <a>
                             <i class="fa fa-sign-out"></i>
