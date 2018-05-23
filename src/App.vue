@@ -1,7 +1,7 @@
 <template>
 	<div class="row">
 		<!-- sidebar -->
-		<app-sidebar v-if="authenticated"></app-sidebar>
+		<app-sidebar v-if="authenticated" @logout="logoutUser"></app-sidebar>
 
 		<!-- main content -->
 		<transition name="fade" mode="out-in">

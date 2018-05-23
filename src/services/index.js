@@ -12,9 +12,8 @@ export const axios = Axios.create({
 });
 
 // Intercept each request and set the bearer token for user
-/**
 axios.interceptors.request.use((config) => {
-    let apiToken = store.getters['Auth/getUser'].api_token;
+    let apiToken = store.getters['Auth/getUser'].token;
 
     if (apiToken && !config.headers.common.Authorization) {
         config.headers.common.Authorization = `Bearer ${apiToken}`;
@@ -22,10 +21,9 @@ axios.interceptors.request.use((config) => {
 
     return config;
 });
-*/
+
 
 // Logout user when the api token is not working (expired or being refreshed)
-/**
 axios.interceptors.response.use((response) => {
     return response;
 }, (error) => {
@@ -36,4 +34,3 @@ axios.interceptors.response.use((response) => {
 
     return Promise.reject(error);
 });
-*/

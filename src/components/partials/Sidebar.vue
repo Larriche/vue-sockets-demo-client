@@ -49,15 +49,31 @@
                         </a>
                     </router-link>
 
-                    <router-link :to="{ name: 'logout' }" tag="li" active-class="active" exact>
+                    <li @click.prevent="logoutUser" active-class="active" exact>
                         <a>
                             <p>
                                 <i class="fa fa-sign-out"></i>Log Out
                             </p>
                         </a>
-                    </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+    methods: {
+        ...mapActions('Auth', [
+            'logout'
+        ]),
+
+        logoutUser() {
+            this.$emit('logout');
+        }
+    }
+}
+</script>

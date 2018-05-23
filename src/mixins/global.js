@@ -37,6 +37,8 @@ export default {
     },
 
     mounted() {
-        this.initLoadUsers();
+        if (this.user && this.user.role == 'admin') {
+            this.initLoadUsers();
+        }
     }
 };

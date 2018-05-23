@@ -5,12 +5,12 @@
                 <form role="form" @submit.prevent="loginUser">
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="email" v-model="user.email">
+                        <input type="text" class="form-control" name="email" v-model="userData.email">
                     </div>
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" v-model="user.password">
+                        <input type="password" class="form-control" name="password" v-model="userData.password">
                     </div>
 
                     <div class="form-group">
@@ -30,7 +30,7 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return {
-            user: {
+            userData: {
                 email: '',
                 password: ''
             }
@@ -43,7 +43,7 @@ export default {
         }),
 
         loginUser() {
-            this.authenticate(this.user)
+            this.authenticate(this.userData)
                 .then((response) => {
 						this.$router.push({ name: 'messages' });
 					})
