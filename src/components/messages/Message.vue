@@ -1,6 +1,7 @@
 <template>
     <div class="row message-container">
         <div :class="messageClass">
+            <p class="sender">{{ message.Author.name }}</p>
             <p>{{ message.message }}</p>
         </div>
     </div>
@@ -32,8 +33,7 @@ export default {
 
 <style scoped>
 .message {
-    height: 50px;
-    padding: 10px;
+    padding: 15px;
     color: white;
     border-radius: 10px;
     font-size: 1.3em;
@@ -49,5 +49,9 @@ export default {
 
 .outgoing {
     background: lightseagreen;
+}
+
+.sender {
+    font-size: 0.8em;
 }
 </style>

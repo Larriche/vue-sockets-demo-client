@@ -21,22 +21,41 @@ export default {
 	},
 
 	computed: {
-			...mapGetters({
-				authenticated: 'Auth/check',
-				getUser: 'Auth/getUser',
-			})
-		},
+		...mapGetters({
+			authenticated: 'Auth/check',
+			user: 'Auth/getUser',
+		})
+	},
 
-		methods: {
-			...mapActions({
-				logout: 'Auth/logout',
-			}),
+	sockets: {
+        connect() {
+            let room = 'user_' + this.user.id;
 
-			logoutUser() {
-				this.logout();
-				this.$router.push({ name: 'login' });
-			}
+            // Fired when the socket connects.
+            this.isConnected = true;
+            this.$socket.emit('room', room);
+        },
+
+        disconnect() {
+            this.isConnected = false;
+        },
+
+        // Fired when the server sends something on the "message" channel.
+        message(data) {
+            this.addNewMessage(data);
+        }
+    },
+
+	methods: {
+		...mapActions({
+			logout: 'Auth/logout',
+		}),
+
+		logoutUser() {
+			this.logout();
+			this.$router.push({ name: 'login' });
 		}
+	}
 }
 </script>
 

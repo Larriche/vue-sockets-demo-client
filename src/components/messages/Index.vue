@@ -9,38 +9,40 @@
         <div class="row page-body">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
                 <p v-if="isConnected">We're connected to the server!</p>
-                <message
-                    v-for="message in messages"
-                    :message="message"
-                    :userId="user.id"></message>
+                <div id="messages-container">
+                    <message
+                        v-for="message in messages"
+                        :message="message"
+                        :userId="user.id"></message>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-2 col-md-offset-2">
-                            <div class="form-group" v-if="user.role=='admin'">
-                                <select class="form-control" v-model="messageTo">
-                                    <option value="">Select a client</option>
-                                    <option v-for="user in users"
-                                            :value="user.id">
-                                            {{ user.name }}
-                                    </option>
-                                </select>
-                            </div>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                        <div class="form-group" v-if="user.role=='admin'">
+                            <select class="form-control" v-model="messageTo">
+                                <option value="">Select a client</option>
+                                <option v-for="user in users"
+                                        :value="user.id">
+                                        {{ user.name }}
+                                </option>
+                            </select>
+                        </div>
 
-                            <div class="input-group">
-                                <input type="text"
-                                    class="form-control chatbox"
-                                    placeholder="Say something"
-                                    v-model="message"
-                                    name="search_term">
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control chatbox"
+                                placeholder="Say something"
+                                v-model="message"
+                                name="search_term">
 
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-lg btn-info" id="search-button" @click="sendMessage">
-                                        SEND
-                                    </button>
-                                </span>
-                            </div>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-lg btn-info" id="search-button" @click="sendMessage">
+                                    SEND
+                                </button>
+                            </span>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -76,22 +78,9 @@ const messages =  {
     },
 
     sockets: {
-        connect() {
-            let room = 'user_' + this.user.id;
-
-            // Fired when the socket connects.
-            this.isConnected = true;
-            this.$socket.emit('room', room);
-        },
-
-        disconnect() {
-            this.isConnected = false;
-        },
-
         // Fired when the server sends something on the "message" channel.
         message(data) {
             this.addNewMessage(data);
-            this.$socket.emit('transfer_message', data);
         }
     },
 
@@ -159,5 +148,11 @@ export default messages;
 
 #search-button {
     height: 50px;
+}
+
+#messages-container {
+    padding: 20px;
+    height: 500px;
+    overflow-y: scroll;
 }
 </style>
