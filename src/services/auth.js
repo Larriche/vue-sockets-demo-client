@@ -10,14 +10,11 @@ export default {
             .catch(error => Promise.reject(error.response.data));
     },
 
-	/**
-	 * Get currently logged in user's info. Needed to refresh
-	 * users data
-	 *
-	 * @param {Integer} id Id of user
+    /**
+	 * Sign up a new user
 	 */
-    getUserInfo(id) {
-        return axios.get('users/' + id)
+    signup(user) {
+        return axios.post('auth/signup', user)
             .then(response => Promise.resolve(response.data))
             .catch(error => Promise.reject(error.response.data));
     }

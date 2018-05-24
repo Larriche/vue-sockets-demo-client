@@ -34,6 +34,12 @@ const Login = resolve => {
     });
 };
 
+const SignUp = resolve => {
+    require.ensure(['../components/auth/SignUp.vue'], () => {
+        resolve(require('../components/auth/SignUp.vue'));
+    });
+};
+
 export default [
     {
         path: '/messages',
@@ -64,5 +70,10 @@ export default [
         path: '/login',
         component: Login,
         name: 'login'
+    },
+    {
+        path: '/signup',
+        component: SignUp,
+        name: 'signup'
     }
 ];

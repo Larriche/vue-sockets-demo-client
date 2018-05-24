@@ -87,6 +87,20 @@ const actions = {
             });
     },
 
+    /**
+     * Sign up a user
+     *
+     * @param {Object} user
+     */
+    signup({commit}, user) {
+        return AuthService.signup(user)
+            .then((response) => {
+                return Promise.resolve(response);
+            }, (error) => {
+                return Promise.reject(error);
+            });
+    },
+
 	/**
 	 * Log user out
 	 *
