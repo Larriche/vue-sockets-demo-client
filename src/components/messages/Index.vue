@@ -114,18 +114,26 @@ const messages =  {
             let $container = $("#messages-container");
 
             this.addNewMessage(message).then(() => {
-                $container.scrollTop($container[0].scrollHeight - $container[0].clientHeight);
+                if ($container)
+                    $container.scrollTop($container[0].scrollHeight - $container[0].clientHeight);
             });
         },
 
         initLoadMessages(query = {}) {
+            let $container = $("#messages-container");
+
             query = {
                 user_id: this.user.id
             };
 
             this.loadMessages(query)
+                .then(() => {
+                    if ($container && $container[0])
+                         $container.scrollTop($container[0].scrollHeight - $container[0].clientHeight);
+                })
                 .catch((error) => {
                     alert('An error occurred');
+                    console.log(error);
                 });
         }
     },

@@ -37,8 +37,19 @@ export default {
     },
 
     mounted() {
+        let adminPages = ['commands', 'users'];
+        let currentRoute = this.$route.name;
+
         if (this.user && this.user.role == 'admin') {
             this.initLoadUsers();
         }
+
+        if (this.user && this.user.role != 'admin') {
+            if (adminPages.indexOf(currentRoute) >= 0) {
+                this.$router.push({ name: 'messages' });
+            }
+        }
+
+
     }
 };
