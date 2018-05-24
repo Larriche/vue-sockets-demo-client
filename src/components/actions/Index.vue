@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" @change="sendStatistic($event, 'number_field_updated')">
                 </div>
             </div>
         </div>

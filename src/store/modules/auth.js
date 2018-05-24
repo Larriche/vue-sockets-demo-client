@@ -109,24 +109,6 @@ const actions = {
     logout({ commit }) {
         commit(LOGOUT);
         commit(UPDATE_USER_INFO);
-    },
-
-	/**
-	 * Load user data
-	 *
-	 * @param {*} param0
-	 */
-    getUserInfo({ commit, getters }) {
-        let user_id = getters.getUser.id;
-        return AuthService.getUserInfo(user_id)
-            .then((response) => {
-                commit(UPDATE_USER_INFO, response);
-
-                return Promise.resolve(response);
-            })
-            .catch((error) => {
-                return Promise.reject(error);
-            });
     }
 };
 
