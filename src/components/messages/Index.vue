@@ -97,6 +97,10 @@ const messages =  {
             let message = this.message;
             let userId = this.user.id;
 
+            if (!message) {
+                return;
+            }
+
             let messageData = {
                 message: message,
                 fromId: userId
