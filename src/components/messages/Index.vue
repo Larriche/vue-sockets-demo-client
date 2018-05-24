@@ -9,7 +9,7 @@
         <div class="row page-body">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
                 <p v-if="isConnected">We're connected to the server!</p>
-                <div id="messages-container">
+                <div id="messages-container" v-if="messages.length">
                     <message
                         v-for="message in messages"
                         :message="message"
@@ -78,7 +78,7 @@ const messages =  {
     sockets: {
         // Fired when the server sends something on the "message" channel.
         message(data) {
-            this.addNewMessage(data);
+            this.appendMessage(data);
         }
     },
 
@@ -106,7 +106,16 @@ const messages =  {
                 messageData.toId = this.messageTo;
             }
 
-            this.$socket.emit('message', messageData)
+            this.$socket.emit('message', messageData);
+            this.message = "";
+        },
+
+        appendMessage(message) {
+            let $container = $("#messages-container");
+
+            this.addNewMessage(message).then(() => {
+                $container.scrollTop($container[0].scrollHeight - $container[0].clientHeight);
+            });
         },
 
         initLoadMessages(query = {}) {
@@ -141,7 +150,8 @@ export default messages;
 
 #messages-container {
     padding: 20px;
-    height: 500px;
+    max-height: 500px;
     overflow-y: scroll;
+    margin-bottom: 30px;
 }
 </style>

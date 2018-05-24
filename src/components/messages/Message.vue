@@ -1,7 +1,7 @@
 <template>
     <div class="row message-container">
         <div :class="messageClass">
-            <p class="sender">{{ message.Author.name }}</p>
+            <p class="sender" v-if="direction=='incoming'">{{ message.Author.name }}</p>
             <p>{{ message.message }}</p>
         </div>
     </div>
@@ -12,16 +12,16 @@ export default {
     props: ['message', 'userId'],
 
     computed: {
-        messageClass() {
-            let direction = '';
-
+        direction() {
             if (this.message.fromId == this.userId) {
-                direction = 'outgoing';
+                return 'outgoing';
             } else {
-                direction = 'incoming';
+                return 'incoming';
             }
+        },
 
-            if (direction == 'incoming') {
+        messageClass() {
+            if (this.direction == 'incoming') {
                 return 'message incoming col-lg-6 col-md-6 col-xs-12';
             } else {
                 return 'message outgoing col-lg-6 col-md-6 col-xs-12 col-lg-offset-6 col-md-offset-6';

@@ -41,10 +41,6 @@ export default {
             this.isConnected = false;
         },
 
-        message(data) {
-            this.addNewMessage(data);
-		},
-
 		command(data) {
 			let command = data.message;
 
