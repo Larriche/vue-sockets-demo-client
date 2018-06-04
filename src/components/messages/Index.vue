@@ -36,7 +36,8 @@
                                 name="search_term">
 
                             <span class="input-group-btn">
-                                <button type="submit" id="send-button" class="btn btn-lg btn-info" @click="sendMessage">
+                                <button type="submit" id="send-button" class="btn btn-lg btn-info" @click="sendMessage"
+                                    :disabled="disableSend">
                                     SEND
                                 </button>
                             </span>
@@ -68,7 +69,17 @@ const messages =  {
     computed: {
         ...mapGetters({
             messages: 'Messages/getAll',
-        })
+        }),
+
+        disableSend() {
+            if (this.user.role == 'admin') {
+                if (!this.messageTo) {
+                    return true;
+                }
+            }
+
+            return (this.message.length) ? false : true;
+        }
     },
 
     components: {
