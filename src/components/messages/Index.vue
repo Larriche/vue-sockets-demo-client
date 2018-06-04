@@ -7,7 +7,7 @@
         </div>
 
         <div class="row page-body">
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-4">
                 <p v-if="isConnected">We're connected to the server!</p>
                 <div id="messages-container" v-if="messages.length">
                     <message
@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                    <div class="col-lg-12 col-md-12 col-xs-12">
                         <div class="form-group" v-if="user.role=='admin'">
                             <select class="form-control" v-model="messageTo">
                                 <option value="">Select a client</option>

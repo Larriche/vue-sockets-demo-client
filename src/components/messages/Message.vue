@@ -1,7 +1,10 @@
 <template>
     <div class="row message-container">
         <div :class="messageClass">
-            <p class="sender" v-if="direction=='incoming'">{{ message.Author.name }}</p>
+            <p class="sender">
+                On {{ message.createdAt | formattedDateTime }}, {{ getAuthorName(message.Author) }} wrote
+            </p>
+
             <p>{{ message.message }}</p>
         </div>
     </div>
@@ -22,9 +25,19 @@ export default {
 
         messageClass() {
             if (this.direction == 'incoming') {
-                return 'message incoming col-lg-6 col-md-6 col-xs-12';
+                return 'message incoming';
             } else {
-                return 'message outgoing col-lg-6 col-md-6 col-xs-12 col-lg-offset-6 col-md-offset-6';
+                return 'message outgoing';
+            }
+        }
+    },
+
+    methods: {
+        getAuthorName(author) {
+            if (author.id == this.userId) {
+                return 'you';
+            } else {
+                return author.name;
             }
         }
     }
