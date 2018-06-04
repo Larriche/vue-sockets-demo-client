@@ -8,6 +8,14 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="text-center site-user">
+                    <p><span class="fa fa-circle logged-in"></span> {{ this.user.name }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="menu">
                     <router-link :to="{ name: 'messages' }" tag="li" active-class="active" exact>
                         <a>

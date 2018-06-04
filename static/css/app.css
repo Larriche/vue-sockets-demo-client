@@ -9,6 +9,16 @@
   height: 180vh;
 }
 
+.site-user {
+  margin-top: 50px;
+  color: #FFFFFF;
+  font-size: 1.2em;
+}
+
+.site-user .logged-in {
+  color: green;
+}
+
 /** Menu **/
 
 .site-logo-container {
