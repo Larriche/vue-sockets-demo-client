@@ -61,7 +61,10 @@ export default {
         loginUser() {
             this.authenticate(this.userData)
                 .then((response) => {
-						this.$router.push({ name: 'messages' });
+                        let room = 'user_' + this.user.id;
+                        this.$socket.emit('log_visit', {userId: this.user.id});
+                        this.$socket.emit('room', room);
+                        this.$router.push({ name: 'messages' });
 					})
 					.catch((errors) => {
                         alert('Invalid login details')
