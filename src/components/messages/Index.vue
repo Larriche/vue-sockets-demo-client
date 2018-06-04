@@ -33,7 +33,8 @@
                                 class="form-control chatbox"
                                 placeholder="Say something"
                                 v-model="message"
-                                name="search_term">
+                                name="message"
+                                v-on:keyup="handleMessageKeyPress">
 
                             <span class="input-group-btn">
                                 <button type="submit" id="send-button" class="btn btn-lg btn-info" @click="sendMessage"
@@ -150,6 +151,12 @@ const messages =  {
                     alert('An error occurred');
                     console.log(error);
                 });
+        },
+
+        handleMessageKeyPress(e) {
+            if (e.keyCode === 13 && !this.disableSend) {
+                this.sendMessage();
+            }
         }
     },
 
