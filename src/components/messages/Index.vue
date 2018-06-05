@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-xs-12">
                         <div class="form-group" v-if="user.role=='admin'">
-                            <select class="form-control" v-model="messageTo">
+                            <select class="form-control" v-model="messageTo" @change='initLoadMessages'>
                                 <option value="">Select a client</option>
                                 <option v-for="user in users"
                                         :value="user.id">
@@ -135,12 +135,20 @@ const messages =  {
             });
         },
 
-        initLoadMessages(query = {}) {
+        initLoadMessages() {
+            let query = {};
             let $container = $("#messages-container");
 
-            query = {
-                user_id: this.user.id
-            };
+            if (!this.messageTo) {
+                query = {
+                    user_id: this.user.id
+                };
+            } else {
+                query = {
+                    user_1: this.user.id,
+                    user_2: this.messageTo
+                }
+            }
 
             this.loadMessages(query)
                 .then(() => {
@@ -162,6 +170,10 @@ const messages =  {
 
     mounted() {
         this.initLoadMessages();
+
+        if (this.user && this.user.role == 'admin') {
+            this.initLoadUsers();
+        }
     }
 };
 
